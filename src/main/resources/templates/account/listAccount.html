@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <h2>Danh sach tai khoan</h2>
+<table border="1">
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>username</th>
+        <th>password</th>
+        <th>fullname</th>
+        <th>email</th>
+        <th>status</th>
+        <th>role</th>
+        <th>action</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="account, iStat : ${accountPage.content}">
+        <td th:text="${account.id}"></td>
+        <td th:text="${account.password}"></td>
+        <td th:text="${account.fullName}"></td>
+        <td th:text="${account.email}"></td>
+        <td th:text="${account.role}"></td>
+        <td th:text="${account.status}"></td>
+        <td><a class="btn btn-primary" th:href="@{accounts/update-account/{id}(id=${account.id})}">Edit</a>
+        </td>
+        <td><a class="btn btn-danger" th:href="@{accounts/delete/{id}(id=${account.id})}">Delete</a></td>
+    </tr>
+    </tbody>
+</table>
+  <ul >
+    <li th:if="${accountPage.hasPrevious}" class="page-item">
+      <a class="page-link" th:href="@{/accounts(size=${accountPage.size}, page=${accountPage.number })}" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li th:each="pageNumber : ${pageNumbers}" class="page-item" th:class="${pageNumber == accountPage.number + 1} ? 'active'">
+      <a class="page-link" th:href="@{/accounts(size=${accountPage.size}, page=${pageNumber})}" th:text="${pageNumber}"></a>
+    </li>
+    <li th:if="${accountPage.hasNext}" class="page-item">
+      <a class="page-link" th:href="@{/accounts(size=${accountPage.size}, page=${accountPage.number + 1})}" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</body>
+</html>

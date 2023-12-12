@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Account</title>
+</head>
+<body>
+<h2>Edit Account</h2>
+<form th:action="@{/accounts/update-account/{id}(id=${account.id})}" method="post">
+  <input type="hidden" th:field="*{account.id}" />
+
+  <label for="fullName">Full Name:</label>
+  <input type="text" id="fullName" name="fullName" th:value="${account.fullName}" required/><br/>
+
+  <label for="password">Password:</label>
+  <input type="password" id="password" name="password" th:value="${account.password}" required/><br/>
+
+  <label for="email">Email:</label>
+  <input type="text" id="email" name="email" th:value="${account.email}" required/><br/>
+
+  <label for="phone">Phone:</label>
+  <input type="text" id="phone" name="phone" th:value="${account.phone}" required/><br/>
+
+  <label for="status">Status:</label>
+  <input type="text" id="status" name="status" th:value="${account.status}" required/><br/>
+
+  <label for="role">Role:</label>
+  <select id="role" name="role" required>
+    <option value="ADMIN" th:selected="${account.role == 'ADMIN'}">Admin</option>
+    <option value="USER" th:selected="${account.role == 'USER'}">User</option>
+  </select><br/>
+
+  <button type="submit">Update Account</button>
+</form>
+</body>
+</html>
